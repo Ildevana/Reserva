@@ -25,9 +25,9 @@ CREATE TABLE PERIODO (
 );
 
 create table CLIENTE_MESA (
-	IdMesa int not null primary key ,
-	IdCliente int not null primary key,
-	IdPeriodo int not null primary key,
+	IdMesa int not null ,
+	IdCliente int not null,
+	IdPeriodo int not null,
 	Data date not null,
 	QtdOcupada int not null,
 	CONSTRAINT pk_id PRIMARY KEY (idmesa, idcliente, idperiodo),
