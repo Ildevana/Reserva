@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditClienteMesaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditClienteMesaLabel_data}" for="data" />
+                    <h:inputText id="data" value="#{clienteMesaController.selected.data}" title="#{bundle.EditClienteMesaTitle_data}" required="true" requiredMessage="#{bundle.EditClienteMesaRequiredMessage_data}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditClienteMesaLabel_qtdocupada}" for="qtdocupada" />
+                    <h:inputText id="qtdocupada" value="#{clienteMesaController.selected.qtdocupada}" title="#{bundle.EditClienteMesaTitle_qtdocupada}" required="true" requiredMessage="#{bundle.EditClienteMesaRequiredMessage_qtdocupada}"/>
+                    <h:outputLabel value="#{bundle.EditClienteMesaLabel_periodo}" for="periodo" />
+                    <h:selectOneMenu id="periodo" value="#{clienteMesaController.selected.periodo}" title="#{bundle.EditClienteMesaTitle_periodo}" required="true" requiredMessage="#{bundle.EditClienteMesaRequiredMessage_periodo}">
+                        <f:selectItems value="#{periodoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditClienteMesaLabel_mesa}" for="mesa" />
+                    <h:selectOneMenu id="mesa" value="#{clienteMesaController.selected.mesa}" title="#{bundle.EditClienteMesaTitle_mesa}" required="true" requiredMessage="#{bundle.EditClienteMesaRequiredMessage_mesa}">
+                        <f:selectItems value="#{mesaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditClienteMesaLabel_cliente}" for="cliente" />
+                    <h:selectOneMenu id="cliente" value="#{clienteMesaController.selected.cliente}" title="#{bundle.EditClienteMesaTitle_cliente}" required="true" requiredMessage="#{bundle.EditClienteMesaRequiredMessage_cliente}">
+                        <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{clienteMesaController.update}" value="#{bundle.EditClienteMesaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditClienteMesaViewLink}"/>
+                <br />
+                <h:commandLink action="#{clienteMesaController.prepareList}" value="#{bundle.EditClienteMesaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditClienteMesaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

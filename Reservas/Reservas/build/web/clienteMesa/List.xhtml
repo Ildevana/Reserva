@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListClienteMesaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListClienteMesaEmpty}" rendered="#{clienteMesaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{clienteMesaController.items.rowCount > 0}">
+                    <h:outputText value="#{clienteMesaController.pagination.pageFirstItem + 1}..#{clienteMesaController.pagination.pageLastItem + 1}/#{clienteMesaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{clienteMesaController.previous}" value="#{bundle.Previous} #{clienteMesaController.pagination.pageSize}" rendered="#{clienteMesaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{clienteMesaController.next}" value="#{bundle.Next} #{clienteMesaController.pagination.pageSize}" rendered="#{clienteMesaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{clienteMesaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClienteMesaTitle_data}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.data}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClienteMesaTitle_qtdocupada}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qtdocupada}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClienteMesaTitle_periodo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClienteMesaTitle_mesa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mesa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClienteMesaTitle_cliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cliente}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <p:commandLink action="#{clienteMesaController.prepareView}" value="#{bundle.ListClienteMesaViewLink}"></p:commandLink>
+                            <p:outputLabel value=" "></p:outputLabel>
+                            <!--<p:commandLink action="#{clienteMesaController.prepareEdit}" value="#{bundle.ListClienteMesaEditLink}"></p:commandLink>-->
+                            <!--<p:outputLabel value=" "></p:outputLabel>-->
+                            <p:commandLink action="#{clienteMesaController.destroy}" value="#{bundle.ListClienteMesaDestroyLink}"></p:commandLink>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{clienteMesaController.prepareCreate}" value="#{bundle.ListClienteMesaCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/Voltar Menu" value="#{bundle.ListClienteMesaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
